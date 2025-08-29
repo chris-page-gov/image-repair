@@ -1,5 +1,7 @@
 # AI Photo Restoration Toolkit (GFPGAN + Real-ESRGAN)
 
+![version](https://img.shields.io/badge/version-1.2.0-blue)
+
 ## ⚡️ Recommended: Fast Local Development with uv
 
 For the fastest Python workflow, use [uv](https://github.com/astral-sh/uv) (a drop-in replacement for pip/pip-tools/venv):

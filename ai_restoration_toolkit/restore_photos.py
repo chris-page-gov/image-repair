@@ -1,3 +1,8 @@
+import urllib.request
+
+# Allow urlretrieve to be monkeypatched in tests
+def urlretrieve(url: str, path: str) -> None:
+    urllib.request.urlretrieve(url, path)
 #!/usr/bin/env python3
 """
 Photo Restoration Pipeline (Faces + Upscale + Colour)
@@ -23,9 +28,10 @@ import argparse
 import numpy as np
 from glob import glob
 from pathlib import Path
+from typing import Tuple, List, Any
 
 # --- Model imports ---
-from gfpgan import GFPGANer
+from gfpgan import GFPGANer  # type: ignore[attr-defined]
 
 from realesrgan import RealESRGANer
 from realesrgan.archs.srvgg_arch import SRVGGNetCompact
@@ -33,7 +39,7 @@ from realesrgan.archs.srvgg_arch import SRVGGNetCompact
 GFPGAN_URL = "https://github.com/TencentARC/GFPGAN/releases/download/v1.4/GFPGANv1.4.pth"
 ESRGAN_URL = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
 
-def ensure_weights(weights_dir="weights"):
+def ensure_weights(weights_dir: str = "weights") -> Tuple[str, str]:
     os.makedirs(weights_dir, exist_ok=True)
     gfp_path = os.path.join(weights_dir, "GFPGANv1.4.pth")
     esr_path = os.path.join(weights_dir, "realesr-general-x4v3.pth")
@@ -41,24 +47,30 @@ def ensure_weights(weights_dir="weights"):
     import urllib.request
     if not os.path.exists(gfp_path):
         print("Downloading GFPGAN v1.4 weights...")
-        urllib.request.urlretrieve(GFPGAN_URL, gfp_path)
+        urlretrieve(GFPGAN_URL, gfp_path)
     if not os.path.exists(esr_path):
         print("Downloading Real-ESRGAN general-x4v3 weights...")
-        urllib.request.urlretrieve(ESRGAN_URL, esr_path)
+        urlretrieve(ESRGAN_URL, esr_path)
 
     return gfp_path, esr_path
 
-def correct_colour_lab(img_bgr, strength=0.12):
+def correct_colour_lab(img_bgr: np.ndarray[Any, Any], strength: float = 0.12) -> np.ndarray[Any, Any]:
     # neutralise colour cast gently
     lab = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2LAB)
     l, a, b = cv2.split(lab)
-    a_mean, b_mean = a.mean(), b.mean()
+    # Cast to np.ndarray for type checking
+    a = a.astype(np.float32) if hasattr(a, 'astype') else a
+    b = b.astype(np.float32) if hasattr(b, 'astype') else b
+    a_mean, b_mean = float(np.mean(a)), float(np.mean(b))
     a = cv2.add(a, int(-(a_mean - 128) * strength))
     b = cv2.add(b, int(-(b_mean - 128) * strength))
+    # Cast back to uint8 to match l's type for merging
+    a = np.clip(a, 0, 255).astype(np.uint8)
+    b = np.clip(b, 0, 255).astype(np.uint8)
     lab_bal = cv2.merge([l, a, b])
     return cv2.cvtColor(lab_bal, cv2.COLOR_LAB2BGR)
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--in", dest="in_dir", required=True)
     parser.add_argument("--out", dest="out_dir", required=True)
