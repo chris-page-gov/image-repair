@@ -1,5 +1,5 @@
 # CUDA-enabled base with Python (keeps certs & VSCode niceties)
-FROM mcr.microsoft.com/devcontainers/python:3.11
+FROM mcr.microsoft.com/devcontainers/python:3.9
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PIP_NO_CACHE_DIR=1

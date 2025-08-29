@@ -1,5 +1,5 @@
 # Base: Microsoft devcontainers with Python & proper CA certs
-FROM mcr.microsoft.com/devcontainers/python:3.11
+FROM mcr.microsoft.com/devcontainers/python:3.9
 
 # Avoid prompts
 ENV DEBIAN_FRONTEND=noninteractive

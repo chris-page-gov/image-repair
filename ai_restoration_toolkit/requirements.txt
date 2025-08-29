@@ -1,7 +1,7 @@
 # Core
 opencv-python
 Pillow
-numpy
+numpy==1.26.4
 
 # Restoration models
 realesrgan

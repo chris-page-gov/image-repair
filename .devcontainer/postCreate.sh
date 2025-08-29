@@ -12,8 +12,9 @@ mkdir -p input output weights
 # Install uv (fast Python package manager)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Create and activate a virtual environment
-uv venv .venv
+
+# Create and activate a virtual environment (always clear to avoid prompt)
+uv venv --clear .venv
 source .venv/bin/activate
 
 # Install all Python dependencies (runtime + dev) into the venv

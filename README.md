@@ -1,4 +1,3 @@
-
 # AI Photo Restoration Toolkit (GFPGAN + Real-ESRGAN)
 
 ## ⚡️ Recommended: Fast Local Development with uv
@@ -87,3 +86,7 @@ Drop many photos in `./input` – each one is processed and saved to `./output` 
 ## Why this works better
 
 Classical filters blur faces when removing noise. This pipeline **reconstructs** facial detail using learned priors, then upscales the whole image, avoiding the “painted” or “plastic” look.
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) in the project root for a detailed list of all changes, updates, and policies.
