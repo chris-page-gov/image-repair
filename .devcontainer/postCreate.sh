@@ -7,6 +7,10 @@ cd /workspaces/*
 # Optional: create folders to avoid path confusion
 mkdir -p input output weights
 
+# Install required Python packages (if not already installed)
+pip install --upgrade pip
+pip install realesrgan gfpgan basicsr facexlib
+
 # Pre-download model weights (so first run is fast/robust)
 python /usr/local/bin/download_models.py
 
