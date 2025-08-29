@@ -1,0 +1,37 @@
+{
+  "name": "AI Photo Restoration (GFPGAN + Real-ESRGAN)",
+  "image": "",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "vscode",
+      "installZsh": false
+    }
+  },
+  "containerUser": "vscode",
+  "remoteUser": "vscode",
+  "postCreateCommand": "bash .devcontainer/postCreate.sh",
+  "mounts": [
+    "source=${localWorkspaceFolder}/input,target=/workspaces/${localWorkspaceFolderBasename}/input,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/output,target=/workspaces/${localWorkspaceFolderBasename}/output,type=bind,consistency=cached"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "runArgs": [
+    // uncomment for GPU container runtime
+    //"--gpus=all"
+  ]
+}

@@ -1,0 +1,31 @@
+# CUDA-enabled base with Python (keeps certs & VSCode niceties)
+FROM mcr.microsoft.com/devcontainers/python:3.11
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PIP_NO_CACHE_DIR=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    git wget curl ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspaces/${LOCAL_WORKSPACE_FOLDER_BASENAME:-app}
+
+# Install CUDA-enabled PyTorch from official index
+RUN pip install --upgrade pip && \
+    pip install --index-url https://download.pytorch.org/whl/cu121 \
+      torch torchvision torchaudio
+
+COPY ai_restoration_toolkit/requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
+
+COPY .devcontainer/download_models.py /usr/local/bin/download_models.py
+COPY .devcontainer/postCreate.sh /usr/local/bin/postCreate.sh
+RUN chmod +x /usr/local/bin/postCreate.sh
+
+SHELL ["/bin/bash", "-lc"]
