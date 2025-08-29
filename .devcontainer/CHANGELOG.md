@@ -1,5 +1,5 @@
-# Changelog: .devcontainer
 
+# Changelog: .devcontainer
 
 ## 2025-08-29
 
@@ -18,3 +18,7 @@
   - CPU and GPU PyTorch install options
   - Model weights prefetch on container creation
   - Input/output/weights folders and .gitignore
+
+## 2025-08-29
+- Fixed usage instructions in `restore_photos.py` and `README.md` to use correct script path (`ai_restoration_toolkit/restore_photos.py`).
+- Updated model download and usage to use RealESRGAN_x4plus.pth instead of x2plus.

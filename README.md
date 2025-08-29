@@ -21,8 +21,9 @@
 
 4. Run:
 
+
    ```bash
-   python restore_photos.py --in ./input --out ./output --scale 2 --denoise 8 --colour yes
+   python ai_restoration_toolkit/restore_photos.py --in ./input --out ./output --scale 2 --denoise 8 --colour yes
    ```
 
 > Tip for your two examples:

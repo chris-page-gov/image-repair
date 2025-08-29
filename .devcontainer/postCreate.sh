@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Ensure we’re in the workspace
-cd /workspaces/*
+cd /workspaces/image-repair
 
 # Optional: create folders to avoid path confusion
 mkdir -p input output weights

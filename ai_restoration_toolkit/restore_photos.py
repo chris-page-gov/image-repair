@@ -9,10 +9,10 @@ Photo Restoration Pipeline (Faces + Upscale + Colour)
 
 USAGE
 -----
-python restore_photos.py --in ./input --out ./output --scale 2 --denoise 8 --colour yes
+python ai_restoration_toolkit/restore_photos.py --in ./input --out ./output --scale 2 --denoise 8 --colour yes
 
 Recommended for your case:
-python restore_photos.py --in ./input --out ./output --scale 2 --denoise 8 --colour yes
+python ai_restoration_toolkit/restore_photos.py --in ./input --out ./output --scale 2 --denoise 8 --colour yes
 
 Place your JPG/PNG photos in ./input. Outputs appear in ./output.
 """
