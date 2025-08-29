@@ -1,4 +1,19 @@
+
+# Project data
 input/
 output/
 weights/
+
+# Python virtual environments
 .venv/
+
+# Python cache and test artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+
+# macOS
+.DS_Store
