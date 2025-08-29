@@ -4,8 +4,16 @@ All notable changes to this project will be documented in this file. Every PR or
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## [Unreleased]
-- Add changelog file and enforce changelog policy for all future changes.
+### Added
+- `.gitattributes` to enforce LF line endings for cross-platform consistency
+- `.DS_Store` and common Windows system files to `.gitignore`
+- Tiling (tile=256) in RealESRGANer for memory-efficient processing of large images
+
+### Fixed
+- Test discovery and PYTHONPATH usage for pytest and VS Code test explorer
+- README instructions for running tests, VS Code integration, and ensuring module import
 
 All notable changes to this project will be documented in this file.
 

@@ -26,22 +26,24 @@ from pathlib import Path
 
 # --- Model imports ---
 from gfpgan import GFPGANer
+
 from realesrgan import RealESRGANer
+from realesrgan.archs.srvgg_arch import SRVGGNetCompact
 
 GFPGAN_URL = "https://github.com/TencentARC/GFPGAN/releases/download/v1.4/GFPGANv1.4.pth"
-ESRGAN_URL = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x2plus.pth"
+ESRGAN_URL = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesr-general-x4v3.pth"
 
 def ensure_weights(weights_dir="weights"):
     os.makedirs(weights_dir, exist_ok=True)
     gfp_path = os.path.join(weights_dir, "GFPGANv1.4.pth")
-    esr_path = os.path.join(weights_dir, "RealESRGAN_x2plus.pth")
+    esr_path = os.path.join(weights_dir, "realesr-general-x4v3.pth")
 
     import urllib.request
     if not os.path.exists(gfp_path):
         print("Downloading GFPGAN v1.4 weights...")
         urllib.request.urlretrieve(GFPGAN_URL, gfp_path)
     if not os.path.exists(esr_path):
-        print("Downloading Real-ESRGAN x2plus weights...")
+        print("Downloading Real-ESRGAN general-x4v3 weights...")
         urllib.request.urlretrieve(ESRGAN_URL, esr_path)
 
     return gfp_path, esr_path
@@ -73,7 +75,8 @@ def main():
 
     # Init restorers
     face_restorer = GFPGANer(model_path=gfp_path, upscale=1, arch='clean', channel_multiplier=2)
-    bg_restorer = RealESRGANer(model_path=esr_path, scale=2)
+    model = SRVGGNetCompact(num_in_ch=3, num_out_ch=3, num_feat=64, num_conv=32, upscale=4, act_type='prelu')
+    bg_restorer = RealESRGANer(scale=4, model_path=esr_path, model=model, tile=256)
 
     # Gather files
     exts = ("*.jpg","*.jpeg","*.png","*.JPG","*.JPEG","*.PNG")

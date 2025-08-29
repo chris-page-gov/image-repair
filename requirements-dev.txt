@@ -1,4 +1,3 @@
 pytest
 pytest-cov
 torch
-torchvision==0.23.0

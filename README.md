@@ -18,7 +18,15 @@ For the fastest Python workflow, use [uv](https://github.com/astral-sh/uv) (a dr
 
 3. Run tests or scripts as usual (e.g., `python ai_restoration_toolkit/restore_photos.py ...`).
 
-> To run tests, use:
+
+> **VS Code users:**
+> - The test explorer will discover and run tests automatically if you:
+>   - Use the `.vscode/settings.json` provided (pytest enabled, test root set to `tests`)
+>   - Have a `.env` file with `PYTHONPATH=.`
+>   - Select the `.venv` Python interpreter in the bottom-left or via Command Palette
+> - This ensures all tests run in the correct environment and all imports work.
+
+> To run tests manually:
 > ```bash
 > PYTHONPATH=. pytest
 > ```
