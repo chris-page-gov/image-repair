@@ -1,0 +1,10 @@
+# Core
+opencv-python
+Pillow
+numpy
+
+# Restoration models
+realesrgan
+gfpgan
+basicsr
+facexlib
