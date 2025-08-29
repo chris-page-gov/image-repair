@@ -7,9 +7,18 @@ cd /workspaces/image-repair
 # Optional: create folders to avoid path confusion
 mkdir -p input output weights
 
-# Install required Python packages (if not already installed)
-pip install --upgrade pip
-pip install realesrgan gfpgan basicsr facexlib
+
+
+# Install uv (fast Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create and activate a virtual environment
+uv venv .venv
+source .venv/bin/activate
+
+# Install all Python dependencies (runtime + dev) into the venv
+uv pip install --upgrade pip
+uv pip install -r ai_restoration_toolkit/requirements.txt -r requirements-dev.txt
 
 # Pre-download model weights (so first run is fast/robust)
 python /usr/local/bin/download_models.py

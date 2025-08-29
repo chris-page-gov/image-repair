@@ -19,6 +19,10 @@
   - Model weights prefetch on container creation
   - Input/output/weights folders and .gitignore
 
-## 2025-08-29
-- Fixed usage instructions in `restore_photos.py` and `README.md` to use correct script path (`ai_restoration_toolkit/restore_photos.py`).
-- Updated model download and usage to use RealESRGAN_x4plus.pth instead of x2plus.
+
+
+## 2025-08-29 (v1.1.0)
+- Enforced exclusion of `.venv/` in `.gitignore` to prevent accidental commits of the virtual environment.
+- Audited and updated all documentation and scripts to consistently reference `.venv` and its activation.
+- Added safeguard and policy in `copilot-instructions.md` to require `.venv` exclusion and venv usage consistency in all future changes.
+- Bumped project version to v1.1.0.

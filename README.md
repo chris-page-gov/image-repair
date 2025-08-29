@@ -1,6 +1,49 @@
 
 # AI Photo Restoration Toolkit (GFPGAN + Real-ESRGAN)
 
+## ⚡️ Recommended: Fast Local Development with uv
+
+For the fastest Python workflow, use [uv](https://github.com/astral-sh/uv) (a drop-in replacement for pip/pip-tools/venv):
+
+**If you are working locally (not in a container):**
+1. Install uv (if not already):
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+2. Create a virtual environment and install dependencies:
+   ```bash
+   uv venv .venv
+   source .venv/bin/activate
+   uv pip install -r requirements.txt -r requirements-dev.txt
+   ```
+
+3. Run tests or scripts as usual (e.g., `python ai_restoration_toolkit/restore_photos.py ...`).
+
+> To run tests, use:
+> ```bash
+> PYTHONPATH=. pytest
+> ```
+> This ensures Python can find the ai_restoration_toolkit module.
+
+
+**If you are in a container (e.g., devcontainer):**
+1. Create and activate a virtual environment:
+   ```bash
+   uv venv .venv
+   source .venv/bin/activate
+   uv pip install -r ai_restoration_toolkit/requirements.txt -r requirements-dev.txt
+   ```
+2. Run tests or scripts as usual (e.g., `pytest`, `python ai_restoration_toolkit/restore_photos.py ...`).
+
+> The devcontainer will do this automatically on first start.
+
+> To run tests, use:
+> ```bash
+> source .venv/bin/activate
+> PYTHONPATH=. pytest
+> ```
+> This ensures Python can find the ai_restoration_toolkit module and uses the venv.
+
 ## What this does
 
 - Restores **faces** (eyes, mouth, hair) with **GFPGAN** for natural skin tones.
